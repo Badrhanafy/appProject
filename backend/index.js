@@ -23,9 +23,9 @@ const authenticateToken = (req, res, next) => {
   });
   
 };
-const PORT = 3999;
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+const PORT = process.env.PORT || 10000; // Use Render's default port
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
 });
 // إعداد الاتصال بقاعدة البيانات
 const db = mysql.createConnection({
