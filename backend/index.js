@@ -29,10 +29,10 @@ app.listen(PORT, () => {
 });
 // إعداد الاتصال بقاعدة البيانات
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",  
-    password: "",
-    database: "schools",
+    host: "sql7.freesqldatabase.com",
+    user: "sql7765157",  
+    password: "N7lh8yF2cz",
+    database: "sql7765157",
 });
 
 // تعريف __dirname في ES Module

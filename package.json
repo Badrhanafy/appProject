@@ -9,7 +9,9 @@
     },
     "devDependencies": {
         "concurrently": "^7.6.0"
+    },
+    "dependencies": {
+        "dotenv": "^16.4.7",
+        "webpack-dev-server": "^5.2.0"
     }
-    
-
 }

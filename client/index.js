@@ -8,31 +8,30 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { connect } from "http2";
 import { type } from "os";
+import dotenv from "dotenv";
+dotenv.config();
+
 const app = express();
-const authenticateToken = (req, res, next) => {
-  const token = req.header('Authorization')?.replace('Bearer ', '')
-  if (!token) {
-    return res.status(401).json({ message: 'Access denied. No token provided.' });
-  }
- jwt.verify(token, 'thissvevehjvebvjehjb43r32r2fbf', (err, user) => {
-    if (err) {
-      return res.status(403).json({ message: 'Invalid token' });
-    }
-    req.user = user;
-    next(); 
-  });
-  
-};
-const PORT = 3999;
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
-// إعداد الاتصال بقاعدة البيانات
+
+// Use Render's dynamic port
+const PORT = process.env.PORT || 10000;
+
+// MySQL Database Connection (Using FreeSQLDatabase.com)
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",  
-    password: "",
-    database: "schools",
+    host: process.env.DB_HOST, // Set in Render environment variables
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT || 3306, // Default MySQL port
+});
+
+// Connect to MySQL
+db.connect((err) => {
+    if (err) {
+        console.error("❌ Database connection failed:", err.message);
+        return;
+    }
+    console.log("✅ Connected to the MySQL database. on "+PORT );
 });
 
 // تعريف __dirname في ES Module
